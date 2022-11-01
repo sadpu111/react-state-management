@@ -29,11 +29,16 @@ import {useForm} from "react-hook-form"; // 호출 대상을 중괄호로 안묶
 
 function ToDoList() {
   const {register, watch} = useForm(); // react-hook에서 제공하는 register 함수
-  console.log(watch())
+  console.log(watch()) // form의 입력값 추적
   return (
     <div>
       <form>
-        <input {...register("todo")} placeholder="Enter a todo"></input>
+        <input {...register("Email")} placeholder="Email"></input>
+        <input {...register("firstName")} placeholder="First Name"></input>
+        <input {...register("lastName")} placeholder="Last Name"></input>
+        <input {...register("userName")} placeholder="User Name"></input>
+        <input {...register("password")} placeholder="Password"></input>
+        <input {...register("password Confirm")} placeholder="Password Confirm"></input>
         <button>add</button>
       </form>
     </div>)
