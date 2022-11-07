@@ -46,12 +46,12 @@ function ToDoList() {
           },
         })} placeholder="Email"></input>
         <span>
-          {errors.email?.message}
+          {errors.emial?.message}
         </span>
         <input {...register("firstName", { required: true })} placeholder="First Name"></input>
         <input {...register("lastName", { required: true })} placeholder="Last Name"></input>
         <input {...register("userName", { required: true, minLength: 10 })} placeholder="User Name"></input>
-        <input {...register("password", { required: true, minLength: 10 })} placeholder="Password"></input>
+        
         <input {...register("passwordConfirm", { required: "Password is required...", minLength: { value: 5, message: "too short" } })} placeholder="Password Confirm"></input>
         <button>add</button>
       </form>
