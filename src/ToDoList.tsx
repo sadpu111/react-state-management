@@ -12,6 +12,7 @@ interface IFormData {
   userName: string;
   password: string;
   passwordConfirm: string;
+  extraError?: string;
 };
 
 /* function ToDoList() {
@@ -41,9 +42,12 @@ interface IFormData {
   } */
 
 function ToDoList() {
-  const { register, handleSubmit, formState:{errors} } = useForm<IFormData>(); // react-hook에서 제공하는 함수(watch:form의 입력값 추적, handleSubmit: onSubmit 대체)
-  const onValid = (data: any) => {
-    console.log(data);
+  const { register, handleSubmit, formState: { errors }, setError } = useForm<IFormData>(); // react-hook에서 제공하는 함수(watch:form의 입력값 추적, handleSubmit: onSubmit 대체)
+  const onValid = (data: IFormData) => {
+    if (data.password !== data.passwordConfirm) {
+      return setError("passwordConfirm", { message: "password is not the same..." }, { shouldFocus: true })
+    };
+    // setError("extraError", {message: "server offline..."})
   };
   console.log(errors);
   return (
@@ -64,7 +68,14 @@ function ToDoList() {
         <span>
           {errors.email?.message}
         </span>
-        <input {...register("firstName", { required: "First name  is required" })} placeholder="First Name"></input>
+        <input
+          {...register("firstName", {
+            required: "First name  is required",
+            validate: {
+              noWoo: (value) => value.includes("woo") ? "No woos allows" : true,
+              noFWord: (value) => value.includes("fuck") ? "No F words allows" : true,
+            }
+          })} placeholder="First Name"></input>
         <span>
           {errors.firstName?.message}
         </span>
@@ -77,7 +88,7 @@ function ToDoList() {
           {errors.userName?.message}
         </span>
         <input {...register("password", { required: "Password is required", minLength: { value: 5, message: "too short" } })} placeholder="Password"></input>
-        <span> 
+        <span>
           {errors.password?.message}
         </span>
         <input {...register("passwordConfirm", { required: "Password confirm is required...", minLength: { value: 5, message: "too short" } })} placeholder="Password Confirm"></input>
@@ -85,6 +96,7 @@ function ToDoList() {
           {errors.passwordConfirm?.message}
         </span>
         <button>add</button>
+        <span>{errors.extraError?.message}</span>
       </form>
     </div>)
 }
