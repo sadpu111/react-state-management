@@ -1,9 +1,18 @@
 import React, { ReactElement, useState } from "react";
 import { useForm } from "react-hook-form"; // 호출 대상을 중괄호로 안묶으면 호출 안됨(not callable)
-
+/* 
 interface IFormData {
   [key: string]: string;
-} // index signature 선언
+} // index signature 선언 */
+
+interface IFormData {
+  email: string;
+  firstName: string;
+  lastName: string;
+  userName: string;
+  password: string;
+  passwordConfirm: string;
+};
 
 /* function ToDoList() {
   const [todo, setTodo] = useState("");
@@ -32,11 +41,11 @@ interface IFormData {
   } */
 
 function ToDoList() {
-  const { register, handleSubmit, formState } = useForm<IFormData>(); // react-hook에서 제공하는 함수(watch:form의 입력값 추적, handleSubmit: onSubmit 대체)
+  const { register, handleSubmit, formState:{errors} } = useForm<IFormData>(); // react-hook에서 제공하는 함수(watch:form의 입력값 추적, handleSubmit: onSubmit 대체)
   const onValid = (data: any) => {
     console.log(data);
   };
-  console.log(formState.errors);
+  console.log(errors);
   return (
     <div>
       <form
@@ -52,11 +61,29 @@ function ToDoList() {
           })}
           placeholder="Email"
         />
-        <input {...register("firstName", { required: true })} placeholder="First Name"></input>
-        <input {...register("lastName", { required: true })} placeholder="Last Name"></input>
-        <input {...register("userName", { required: true, minLength: { value: 5, message: "too short" } })} placeholder="User Name"></input>
-        <input {...register("password", { required: true, minLength: { value: 5, message: "too short" } })} placeholder="Password"></input>
-        <input {...register("passwordConfirm", { required: "Password is required...", minLength: { value: 5, message: "too short" } })} placeholder="Password Confirm"></input>
+        <span>
+          {errors.email?.message}
+        </span>
+        <input {...register("firstName", { required: "First name  is required" })} placeholder="First Name"></input>
+        <span>
+          {errors.firstName?.message}
+        </span>
+        <input {...register("lastName", { required: "Last name is required" })} placeholder="Last Name"></input>
+        <span>
+          {errors.lastName?.message}
+        </span>
+        <input {...register("userName", { required: "User name is required", minLength: { value: 5, message: "too short" } })} placeholder="User Name"></input>
+        <span>
+          {errors.userName?.message}
+        </span>
+        <input {...register("password", { required: "Password is required", minLength: { value: 5, message: "too short" } })} placeholder="Password"></input>
+        <span> 
+          {errors.password?.message}
+        </span>
+        <input {...register("passwordConfirm", { required: "Password confirm is required...", minLength: { value: 5, message: "too short" } })} placeholder="Password Confirm"></input>
+        <span>
+          {errors.passwordConfirm?.message}
+        </span>
         <button>add</button>
       </form>
     </div>)
