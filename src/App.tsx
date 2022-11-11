@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components"
-import ToDoList from "./ToDoList";
+import ToDoList from "./components/ToDoList";
 
 const GlobalStyle = createGlobalStyle` // 전역 style component. 적용하려면 컴포넌트에 추가하여 리턴. 아래 내용은 Reser css로 모든 스타일을 제거한 코드 
 // "https://github.com/zacanger/styled-reset/blob/master/src/index.ts"
