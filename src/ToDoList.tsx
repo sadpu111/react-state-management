@@ -5,7 +5,7 @@ interface IFormData {
   [key: string]: string;
 } // index signature 선언 */
 
-interface IFormData {
+/* interface IFormData {
   email: string;
   firstName: string;
   lastName: string;
@@ -13,35 +13,40 @@ interface IFormData {
   password: string;
   passwordConfirm: string;
   extraError?: string;
+}; */
+
+interface IFormData {
+  [key: string]: string;
 };
 
-/* function ToDoList() {
-  const [todo, setTodo] = useState("");
-  const [todoerror, setToDoError] = useState("");
-  const onChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const {
-      currentTarget: { value },
-    } = event;
-    setTodo(value);
-    setToDoError("");
-  };
-  const onSubmit = (event:React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (todo.length < 10) {
-      return setToDoError("Please Enter a longer todo...");
-    }
-    console.log(todo);
-  };
+function ToDoList() {
+  const { register, handleSubmit, setValue, reset } = useForm<IFormData>()
+  // handleSubmit => 첫 번째 인자로 입력된 data가 유효할 때 호출할 함수 입력(여기선 handleValid). 두 번째 인자는 optional로 유효하지 않을 때 호출할 함수 입력
+  const handleVaild = (data: IFormData) => {
+    console.log("add todo", data);
+    setValue("todo1", ""); // submit(add버튼 클릭 시)하고나면 해당 name의 input reset. 여러 개일 경우 reset() 활용
+    // reset();
+  }
   return <div>
-    <form onSubmit={onSubmit}>
-      <input onChange={onChange} value={todo} placeholder="Enter a todo"></input>
+    <form style={{ display: "flex", flexDirection: "column" }} onSubmit={handleSubmit(handleVaild)}>
+      <input {
+        ...register("todo1", {
+          required: "Please enter a todo"
+        })}
+        placeholder="Enter a todo">
+      </input>
+      <input {
+        ...register("todo2", {
+          required: "Please enter a todo"
+        })}
+        placeholder="Enter a todo">
+      </input>
       <button>add</button>
-      {todoerror !== "" ? todoerror : null}
     </form>
   </div>
-  } */
+}
 
-function ToDoList() {
+/* function ToDoList() {
   const { register, handleSubmit, formState: { errors }, setError } = useForm<IFormData>(); // react-hook에서 제공하는 함수(watch:form의 입력값 추적, handleSubmit: onSubmit 대체)
   const onValid = (data: IFormData) => {
     if (data.password !== data.passwordConfirm) {
@@ -99,6 +104,6 @@ function ToDoList() {
         <span>{errors.extraError?.message}</span>
       </form>
     </div>)
-}
+} */
 
 export default ToDoList;
