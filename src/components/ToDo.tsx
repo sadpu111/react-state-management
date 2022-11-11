@@ -9,9 +9,12 @@ function ToDo({ text, category, id }: IToDo) {
     setToDos(preToDos => { // setToDos() => 현재 값(preToDos)를 전달인자로 갖는 function 만들 수 있다
       const targetIndex = preToDos.findIndex(toDo => toDo.id === id); // 특정 toDo의 버튼을 클릭하면 onClick이 실행되면서, preToDos의 toDo들 중에서, 해당 toDo의 id와 동일한 id를 가진 toDo의 index 호출
       const preToDo = preToDos[targetIndex];
-      const newToDo = { text, id, category: name }; // text, id는 기존과 동일, category는 클릭한 버튼의 name으로 변경
-      console.log(preToDo, newToDo);
-      return preToDos;
+      const newToDo = { text, id, category: name as any} ; // text, id는 기존과 동일, category는 클릭한 버튼의 name으로 변경
+      return [
+        ...preToDos.slice(0, targetIndex),
+        newToDo,
+        ...preToDos.slice(targetIndex + 1)
+      ];
     });
   }
   /*  const onClick = (newCategory: IToDo["category"]) => {
