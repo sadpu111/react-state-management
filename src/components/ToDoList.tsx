@@ -1,5 +1,5 @@
 import { useRecoilValue } from "recoil";
-import { toDoState } from "./Atoms";
+import { toDoSelector, toDoState } from "./Atoms";
 import CreateToDo from "./CreateToDo";
 import ToDo from "./ToDo";
 
@@ -8,15 +8,27 @@ function ToDoList() {
   /* const [toDos, setToDos] = useRecoilState(toDoState); // 아래 두 줄의 코드를 한 줄로 합친 것(value: toDos, modFunc: setToDos). useState와 유사한 구조
   const value = useRecoilValue(toDoState); // (1) atom의 배열을 가져오고
   const modFunc = useSetRecoilState(toDoState); // (2) 그 배열을 수정한다  */
-  const toDos = useRecoilValue(toDoState);
-  console.log(toDos);
+  // const toDos = useRecoilValue(toDoState); //category별로 render하기 위해 삭제
+  const [toDo, doing, done] = useRecoilValue(toDoSelector);
   return <div>
     <h1>To Dos</h1>
-    <hr />
+    <hr /> 
     <CreateToDo />
+    <h2>To Do</h2>
     <ul>
-      {toDos.map(toDo => <ToDo key={toDo.id} {...toDo} />)}
+      {toDo.map(toDo => <ToDo key={toDo.id} {...toDo} />)}
     </ul>
+    <hr />
+    <h2>Doing</h2>
+    <ul>
+      {doing.map(toDo => <ToDo key={toDo.id} {...toDo} />)}
+    </ul>
+    <hr />
+    <h2>Done</h2>
+    <ul>
+      {done.map(toDo => <ToDo key={toDo.id} {...toDo} />)}
+    </ul>
+    <hr />
   </div>
 }
 
