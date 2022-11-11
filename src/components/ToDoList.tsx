@@ -9,6 +9,7 @@ function ToDoList() {
   const value = useRecoilValue(toDoState); // (1) atom의 배열을 가져오고
   const modFunc = useSetRecoilState(toDoState); // (2) 그 배열을 수정한다  */
   const toDos = useRecoilValue(toDoState);
+  console.log(toDos);
   return <div>
     <h1>To Dos</h1>
     <hr />
