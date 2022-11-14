@@ -22,10 +22,10 @@ function ToDo({ text, category, id }: IToDo) {
    }; */
   // onClick 함수로 인자를 넘겨야 할 경우 익명 함수(() => onClick("TO_DO"))로 입력. onClick={onClick}으로 입력할 경우 인자를 전달할 수 없다
   const handleDelete = () => { // 삭제기능 구현
-    setToDos((oldToDos) => {
-      const targetIndex = oldToDos.findIndex((oldToDo) => oldToDo.id === id);
+    setToDos((preToDos) => {
+      const targetIndex = preToDos.findIndex((preToDo) => preToDo.id === id);
 
-      return [...oldToDos.slice(0, targetIndex), ...oldToDos.slice(targetIndex + 1)];
+      return [...preToDos.slice(0, targetIndex), ...preToDos.slice(targetIndex + 1)];
     });
     };
   return (

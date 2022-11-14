@@ -5,9 +5,9 @@ import { atom, selector } from "recoil";
 /* type categories = "TO_DO" | "DOING" | "DONE" // IToDo와 categoryState에서 반복되므로 type을 만들어서 적용 */
 
 export enum Categoires { // enumarable. 입력된 값은 순서에 따라 인덱스 넘버로 값이 바뀌어 적용된다. "TO_DO"는 0, 다음으로 1, 2... 그래서 category를 TO_DO로 선택하여 입력하면 category 값에 0이 출력된다
-  "TO_DO",
-  "DOING",
-  "DONE",
+  "TO_DO" = "TO_DO",
+  "DOING" = "DOING",
+  "DONE" = "DONE",
   // "TO_DO" = "TO_DO" => 이렇게 입력하면 실제로 값을 "TO_DO"로 변경할 수 있다(0이 아니라)
 }
 
