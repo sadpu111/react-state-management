@@ -16,9 +16,7 @@ function CreateToDo() {
     setValue("toDo", ""); // submit(add버튼 클릭 시)하고나면 해당 name의 input reset. 여러 개일 경우 reset() 활용
   }
   return (
-    <form style={
-      { display: "flex", flexDirection: "column" }}
-      onSubmit={handleSubmit(handleVaild)}>
+    <form onSubmit={handleSubmit(handleVaild)}>
       <input {
         ...register("toDo", {
           required: "Please enter a todo"

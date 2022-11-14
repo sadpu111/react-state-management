@@ -12,15 +12,17 @@ export const toDoState = atom<IToDo[]>({ // (b) IToDO를 toDoState에 적용하�
   default: [],
 });
 
+export const categoryState = atom({
+  key: "category",
+  default: "TO_DO",
+})
+
 export const toDoSelector = selector({
   key: "toDoSelector",
   get: ({ get }) => { // 인자를 객체로 받는데, 그 객체에는 get함수가 들어가 있다
-    const toDos = get(toDoState) // 위의 toDoState atom을 받아온다
-    return [
-      toDos.filter(toDo => toDo.category === "TO_DO"), // filter(조건) => 조건에 맞는 원소들로 구성된 '배열'을 return 한다
-      toDos.filter(toDo => toDo.category === "DOING"),
-      toDos.filter(toDo => toDo.category === "DONE")
-    ]; // return값이 toDoSelector의 value가 된다
+    const toDos = get(toDoState) // get함수를 통해 위의 toDoState atom을 받아온다(여러 atom 가져올 수 있음)
+    const category = get(categoryState); // 위의 categoryState atom 가져온다
+    return toDos.filter(toDo => toDo.category === category) ; // category의 value(ToDoList 컴포넌트에서 select 선택 옵션에 따라 변경)와 toDo.category 일치여부 파악
   },
 
 })
