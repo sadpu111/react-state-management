@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/todo/static/js/main.4dd3bfc1.js",
-    "index.html": "/todo/index.html",
-    "main.4dd3bfc1.js.map": "/todo/static/js/main.4dd3bfc1.js.map"
+    "main.js": "/react-state-management/static/js/main.33cbecf9.js",
+    "index.html": "/react-state-management/index.html",
+    "main.33cbecf9.js.map": "/react-state-management/static/js/main.33cbecf9.js.map"
   },
   "entrypoints": [
-    "static/js/main.4dd3bfc1.js"
+    "static/js/main.33cbecf9.js"
   ]
 }
